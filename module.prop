@@ -1,7 +1,7 @@
 id=ZRAM-Module
-name=zramの附加模块
+name=ZRAM Addon Module
 version=v1.4.0
 versionCode=140
-author=ShirkNeko, xiaoxiaow, FurLC
-description=为内核提供ZRAM算法支持，请勿卸载
-updateJson=https://raw.githubusercontent.com/FurLC/ZRAM-Module/main/update.json
+author=ZRAM Module Developers
+description=Provide ZRAM Algorithm Support for the Kernel
+updateJson=https://raw.githubusercontent.com/AndreiMikh/ZRAM-Module/main/update.json
