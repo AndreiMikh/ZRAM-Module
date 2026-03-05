@@ -69,7 +69,7 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* 响应式支持 */
+/* Responsive Support */
 @media (max-width: 500px) {
   .container {
     max-width: 98%;
