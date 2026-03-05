@@ -1,5 +1,5 @@
-# 算法名
+# Algorithm Name
 ZRAM_ALGO=lz4
 
-# ZRAM字节数
+# ZRAM Bytes
 ZRAM_SIZE=8589934592
