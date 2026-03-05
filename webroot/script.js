@@ -62,7 +62,7 @@ function setStatus(algo, size, used, ratio, skeleton, tip) {
     if ([algo, size, used, ratio][i] !== null)
       el.innerText = [algo, size, used, ratio][i];
   });
-  // 错误提示
+  // Error Prompt
   let tipEl = document.getElementById("errtip");
   if (!tipEl) {
     tipEl = document.createElement("div");
