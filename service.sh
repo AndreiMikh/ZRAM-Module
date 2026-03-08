@@ -108,12 +108,12 @@ else
   log "swapon 失败"
 fi
 
-# ------------- 重点优化：最后再清理多余zram设备 -------------
-log "=== 最后清理多余zram设备（zram1/zram2…） ==="
+# ------------- key optimization: clean up the excess zram -------------
+log "=== finally, clean up excess zram（zram1/zram2） ==="
 for zdev in /dev/block/zram*; do
   [ "$zdev" = "/dev/block/zram0" ] && continue
   [ -b "$zdev" ] || continue
-  log "处理 $zdev ..."
+  log "treatment $zdev ..."
   i=0
   while grep -qw "$zdev" /proc/swaps && [ $i -lt 5 ]; do
     log "swapoff $zdev (第$((i+1))次)"
@@ -125,21 +125,21 @@ for zdev in /dev/block/zram*; do
   [ -e "/sys/block/$zname/reset" ] && echo 1 > "/sys/block/$zname/reset" && log "reset $zname"
   [ -e "/sys/block/$zname/hot_remove" ] && echo 1 > "/sys/block/$zname/hot_remove" && log "hot_remove $zname"
 done
-log "多余zram设备清理完成"
+log "The excess zram equipment is cleaned up"
 
 # --------- ZRAM与内存状态日志 ---------
 log "--------- ZRAM与内存状态 ---------"
-log "zram0 当前支持算法: $(cat /sys/block/zram0/comp_algorithm 2>/dev/null)"
+log "zram0 algorithms are currently supported: $(cat /sys/block/zram0/comp_algorithm 2>/dev/null)"
 
 if grep -q zram0 /proc/swaps; then
-  awk '/zram0/ {printf "zram0 Swap: 设备=%s 类型=%s 总=%.2fGiB 已用=%.2fMiB 优先级=%s", $1, $2, $3/1048576, $4/1024, $5}' /proc/swaps | while read line; do log "$line"; done
+  awk '/zram0/ {printf "zram0 Swap: equipment=%s type=%s total=%.2fGiB used=%.2fMiB priority=%s", $1, $2, $3/1048576, $4/1024, $5}' /proc/swaps | while read line; do log "$line"; done
 else
-  log "zram0 不在 /proc/swaps"
+  log "zram0 not there /proc/swaps"
 fi
 
-MEM_LINE="$(free -h | awk '/^Mem:/ {printf "Mem: 总=%s 已用=%s 可用=%s", $2, $3, $7}')"
-SWAP_LINE="$(free -h | awk '/^Swap:/ {printf "Swap: 总=%s 已用=%s 可用=%s", $2, $3, $4}')"
+MEM_LINE="$(free -h | awk '/^Mem:/ {printf "Mem: total=%s used=%s available=%s", $2, $3, $7}')"
+SWAP_LINE="$(free -h | awk '/^Swap:/ {printf "Swap: total=%s used=%s available=%s", $2, $3, $4}')"
 log "$MEM_LINE"
 log "$SWAP_LINE"
 log "----------------------------------"
-log "=== ZRAM-Module 服务完成 ==="
+log "=== service complete ==="
