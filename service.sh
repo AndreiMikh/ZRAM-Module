@@ -41,12 +41,12 @@ fi
 
 log "rmmod zram"
 if rmmod zram 2>>"$LOG_FILE"; then
-  log "rmmod zram 成功"
+  log "rmmod zram success"
 else
-  log "rmmod zram 失败或为内建"
+  log "rmmod zram failed or builtin"
 fi
 
-log "等待5秒..."
+log "wait for 5 seconds..."
 sleep 5
 
 log "insmod zram.ko"
