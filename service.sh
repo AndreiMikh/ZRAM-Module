@@ -36,7 +36,7 @@ log "swapoff /dev/block/zram0"
 if swapoff /dev/block/zram0 2>>"$LOG_FILE"; then
   log "swapoff success"
 else
-  log "swapoff 失败或无效"
+  log "swapoff failed or ineffective"
 fi
 
 log "rmmod zram"
