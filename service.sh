@@ -34,14 +34,14 @@ fi
 
 log "swapoff /dev/block/zram0"
 if swapoff /dev/block/zram0 2>>"$LOG_FILE"; then
-  log "swapoff success"
+  log "swapoff loaded successfully"
 else
   log "swapoff failed or ineffective"
 fi
 
 log "rmmod zram"
 if rmmod zram 2>>"$LOG_FILE"; then
-  log "rmmod zram success"
+  log "rmmod zram successfull"
 else
   log "rmmod zram failed or builtin"
 fi
@@ -59,21 +59,21 @@ fi
 log "please wait..."
 sleep 5
 
-log "zram0 reset"
+log "zram0 reset..."
 if echo '1' > /sys/block/zram0/reset 2>>"$LOG_FILE"; then
   log "zram0 reset successfully"
 else
   log "zram0 reset failed"
 fi
 
-log "zram0 disksize 0"
+log "zram0 disksize 0..."
 if echo '0' > /sys/block/zram0/disksize 2>>"$LOG_FILE"; then
-  log "zram0 disksize 清零成功"
+  log "zram0 disksize was successful"
 else
-  log "zram0 disksize 清零失败（可忽略）"
+  log "zram0 disksize clearance failed, neglegible"
 fi
 
-log "zram0 maximum compression streams 8"
+log "zram0 maximum compression streams 8..."
 if echo '8' > /sys/block/zram0/max_comp_streams 2>>"$LOG_FILE"; then
   log "zram0 maximum compression streams set successfully"
 else
