@@ -1,5 +1,0 @@
-# Algorithm Name
-ZRAM_ALGO=lz4
-
-# ZRAM Bytes
-ZRAM_SIZE=8589934592
