@@ -7,7 +7,7 @@ ZRAM_DIR="$MODPATH/zram"
 OLD_ZRAM_DIR="$OLD_MODPATH/zram"
 
 ui_print "============="
-ui_print "ZRAM Module"
+ui_print "ZRAM Addon Module"
 ui_print "============="
 
 ui_print ">> Check if the ZRAM Folder for the Installed Module Exists..."
