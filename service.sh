@@ -16,7 +16,7 @@ log "======================================="
 if [ -f "$CONFIG_FILE" ]; then
     . "$CONFIG_FILE"
 else
-    ZRAM_ALGO="lz4kd"
+    ZRAM_ALGO="lz4"
     ZRAM_SIZE="8589934592"
 fi
 
