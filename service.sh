@@ -51,19 +51,19 @@ sleep 5
 
 log "insmod zram.ko"
 if insmod $MODDIR/zram/zram.ko 2>>"$LOG_FILE"; then
-  log "zram.ko 加载成功"
+  log "zram.ko loaded successfully"
 else
-  log "zram.ko 加载失败"
+  log "zram.ko failed to load"
 fi
 
-log "等待5秒..."
+log "please wait..."
 sleep 5
 
 log "zram0 reset"
 if echo '1' > /sys/block/zram0/reset 2>>"$LOG_FILE"; then
-  log "zram0 reset 成功"
+  log "zram0 reset successfully"
 else
-  log "zram0 reset 失败"
+  log "zram0 reset failed"
 fi
 
 log "zram0 disksize 0"
@@ -73,39 +73,39 @@ else
   log "zram0 disksize 清零失败（可忽略）"
 fi
 
-log "zram0 max_comp_streams 8"
+log "zram0 maximum compression streams 8"
 if echo '8' > /sys/block/zram0/max_comp_streams 2>>"$LOG_FILE"; then
-  log "zram0 max_comp_streams 设置成功"
+  log "zram0 maximum compression streams set successfully"
 else
-  log "zram0 max_comp_streams 设置失败"
+  log "zram0 maximum compression streams failed to set up"
 fi
 
-log "设置压缩算法 $ZRAM_ALGO"
+log "set compression algorithm $ZRAM_ALGO"
 if echo "$ZRAM_ALGO" > /sys/block/zram0/comp_algorithm 2>>"$LOG_FILE"; then
-  log "压缩算法已设置 $(cat /sys/block/zram0/comp_algorithm 2>/dev/null)"
+  log "compression algorithm has been set $(cat /sys/block/zram0/comp_algorithm 2>/dev/null)"
 else
-  log "压缩算法设置失败，当前: $(cat /sys/block/zram0/comp_algorithm 2>/dev/null)"
+  log "compression algorithm setting failed，current: $(cat /sys/block/zram0/comp_algorithm 2>/dev/null)"
 fi
 
 log "zram0 disksize $ZRAM_SIZE"
 if echo "$ZRAM_SIZE" > /sys/block/zram0/disksize 2>>"$LOG_FILE"; then
-  log "zram0 disksize 设置成功"
+  log "zram0 disksize setting successfully"
 else
-  log "zram0 disksize 设置失败"
+  log "zram0 disksize setting failed"
 fi
 
 log "mkswap /dev/block/zram0"
 if mkswap /dev/block/zram0 > /dev/null 2>>"$LOG_FILE"; then
-  log "mkswap 成功"
+  log "mkswap success"
 else
-  log "mkswap 失败"
+  log "mkswap failed"
 fi
 
 log "swapon /dev/block/zram0"
 if swapon /dev/block/zram0 > /dev/null 2>>"$LOG_FILE"; then
-  log "swapon 成功"
+  log "swapon success"
 else
-  log "swapon 失败"
+  log "swapon failed"
 fi
 
 # ------------- key optimization: clean up the excess zram -------------
@@ -116,7 +116,7 @@ for zdev in /dev/block/zram*; do
   log "treatment $zdev ..."
   i=0
   while grep -qw "$zdev" /proc/swaps && [ $i -lt 5 ]; do
-    log "swapoff $zdev (第$((i+1))次)"
+    log "swapoff $zdev (first$((i+1))second)"
     swapoff "$zdev"
     sleep 1
     i=$((i+1))
@@ -127,8 +127,8 @@ for zdev in /dev/block/zram*; do
 done
 log "The excess zram equipment is cleaned up"
 
-# --------- ZRAM与内存状态日志 ---------
-log "--------- ZRAM与内存状态 ---------"
+# --------- zram and memory status logs ---------
+log "--------- zram vs memory state ---------"
 log "zram0 algorithms are currently supported: $(cat /sys/block/zram0/comp_algorithm 2>/dev/null)"
 
 if grep -q zram0 /proc/swaps; then
