@@ -1,5 +1,5 @@
-# Algorithm Names
-# lz4 zstd lzo lzo-rle lz4k lz4hc lz4kd 842 zstdn
+# Algorithm Name
+# lz4 zstd lzo lz4kd
 ZRAM_ALGO=
 
 # ZRAM Bytes
