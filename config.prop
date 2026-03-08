@@ -1,0 +1,5 @@
+# Algorithm Name
+ZRAM_ALGO=lz4kd
+
+# ZRAM Size in Bytes
+ZRAM_SIZE=8589934592
