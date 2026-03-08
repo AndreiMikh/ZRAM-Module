@@ -21,7 +21,7 @@ fi
 
 cat <<EOF > "$OUT_FILE"
 {
-  "algorithm": "${algorithm:-未知}",
+  "algorithm": "${algorithm:-Unknown}",
   "size": "${size_mb:-0} MB",
   "used": "${used_mb:-0} MB",
   "ratio": "${ratio} : 1"
