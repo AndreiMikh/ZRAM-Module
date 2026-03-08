@@ -1,0 +1,5 @@
+# 算法名
+ZRAM_ALGO=lz4
+
+# ZRAM字节数
+ZRAM_SIZE=8589934592
