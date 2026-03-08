@@ -9,32 +9,32 @@ log() {
 }
 
 log "======================================="
-log "====== 服务启动：$(date '+%Y-%m-%d %H:%M:%S') ======"
+log "====== service start：$(date '+%Y-%m-%d %H:%M:%S') ======"
 log "======================================="
 
-# ---------- 读取配置 ----------
+# ---------- reading configuration ----------
 if [ -f "$CONFIG_FILE" ]; then
     . "$CONFIG_FILE"
 else
-    ZRAM_ALGO="lz4"
+    ZRAM_ALGO="lz4kd"
     ZRAM_SIZE="8589934592"
 fi
 
-log "读取配置: ZRAM_ALGO=$ZRAM_ALGO, ZRAM_SIZE=$ZRAM_SIZE"
-log "=== ZRAM-Module 服务启动 ==="
-log "等待系统初始化完成..."
+log "read configuration: ZRAM_ALGO=$ZRAM_ALGO, ZRAM_SIZE=$ZRAM_SIZE"
+log "=== service start ==="
+log "wait for the system initialization to complete..."
 sleep 30
 
-log "加载zstdn.ko..."
+log "load zstdn.ko..."
 if insmod $MODDIR/zram/zstdn.ko 2>>"$LOG_FILE"; then
-  log "zstdn.ko 加载成功"
+  log "zstdn.ko loaded successfully"
 else
-  log "zstdn.ko 加载失败"
+  log "zstdn.ko load failed"
 fi
 
 log "swapoff /dev/block/zram0"
 if swapoff /dev/block/zram0 2>>"$LOG_FILE"; then
-  log "swapoff 成功"
+  log "swapoff success"
 else
   log "swapoff 失败或无效"
 fi
